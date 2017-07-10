@@ -43,14 +43,14 @@ def link_crawler(seed_url, link_regex):
         # print(html)
 
         for link in get_links(html):
+            print(link)
+
             if re.match(link_regex, link):
                 link = parse.urljoin(seed_url, link)
-                print(link)
 
-                if link not in seen:
-                    seen.add(link)
-                    crawl_queue.append(link)
-                    print(link)
+                # if link not in seen:
+                #     seen.add(link)
+                #     crawl_queue.append(link)
     
 
 def get_links(html):
