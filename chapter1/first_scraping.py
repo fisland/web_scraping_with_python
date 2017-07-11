@@ -43,14 +43,13 @@ def link_crawler(seed_url, link_regex):
         # print(html)
 
         for link in get_links(html):
-            print(link)
-
             if re.match(link_regex, link):
                 link = parse.urljoin(seed_url, link)
+                print(link)
 
-                # if link not in seen:
-                #     seen.add(link)
-                #     crawl_queue.append(link)
+                if link not in seen:
+                    seen.add(link)
+                    crawl_queue.append(link)
     
 
 def get_links(html):
@@ -60,7 +59,20 @@ def get_links(html):
     html = html.decode('utf-8')
     return webpage_regex.findall(html)
 
-#绝对连接bug
- 
+# 高级功能，解析robot
+# rp = RobotFileParser(url='http://example.webscraping.com/robots.txt')
+# rp.read()
+# url = 'http://example.webscraping.com'
+# user_agent = 'BadCrawler'
+
+# 下载限速
+# class Throttle:
+#     def __init__(self, delay):
+#         self.delay = delay
+#         self.domains = {}
+#     def wait(self, url):
+#         domain = parse.urlparse(url).netloc
+# 避免爬虫陷阱
+
 if __name__ == '__main__':
-    link_crawler('http://example.webscraping.com', '/(index|view)')
+    link_crawler('http://example.webscraping.com', '/places/default/(index|view)')
